@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../FIT100MOBILE"
 		}
 	],
 	"settings": {}
