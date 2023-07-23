@@ -25,8 +25,9 @@ Route::post('/booking/create', [UserController::class,'createBooking']);
 Route::post('/booking/update', [UserController::class,'editBooking']);
 
 Route::get('/courses', [UserController::class,'courses']);
+Route::get('/course/{course_id}', [UserController::class,'getCourse']);
 Route::get('/course-items/{course_id}', [UserController::class,'courseItems']);
-Route::get('/course-item/{course_item_id}', [UserController::class,'getCourseItem']);
+Route::get('/course-item/{item_id}', [UserController::class,'getCourseItem']);
 
 Route::get('/member-records/{user_id}', [UserController::class,'getMemberRecords']);
 Route::get('/member-record/{record_id}', [UserController::class,'getMemberRecord']);
@@ -35,7 +36,7 @@ Route::post('/member-record/update/{record_id}', [UserController::class,'updateM
 Route::post('/member-record/delete/{record_id}', [UserController::class,'deleteMemberRecord']);
 
 Route::post('/course-reviews', [UserController::class,'courseReviews']);
-Route::post('/course-reviews/{user_id}', [UserController::class,'memberCourseReviews']);
+Route::post('/course-reviews/{course_id}/{user_id}', [UserController::class,'memberCourseReviews']);
 Route::post('/course-review/add', [UserController::class,'addCourseReview']);
 Route::post('/course-review/update/{review_id}', [UserController::class,'updateCourseReview']);
 Route::post('/course-review/delete/{review_id}', [UserController::class,'deleteCourseReview']);
