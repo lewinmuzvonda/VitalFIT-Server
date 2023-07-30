@@ -18,7 +18,9 @@ use App\Http\Controllers\API\UserController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/packages', [UserController::class,'packages']);
+Route::get('/packages/{coach_id}/{type}', [UserController::class,'packages']);
+Route::get('/coach/{coach_id}', [UserController::class,'getCoach']);
+Route::get('/coaches', [UserController::class,'getCoaches']);
 
 Route::get('/bookings/{user_id}', [UserController::class,'memberBookings']);
 Route::post('/booking/create', [UserController::class,'createBooking']);

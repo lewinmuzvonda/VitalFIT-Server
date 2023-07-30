@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id");
-            $table->string("start_time");
-            $table->double("duration"); //mins
+            $table->dateTime("start_time");
+            $table->integer("package");
             $table->string("coach");
             $table->integer("status");
             $table->timestamps();

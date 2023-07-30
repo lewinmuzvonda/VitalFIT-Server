@@ -13,6 +13,7 @@ use App\Models\Member;
 use App\Models\MemeberRecord;
 use App\Models\Review;
 use App\Models\Payment;
+use App\Models\Coach;
 
 class UserController extends Controller
 {
@@ -24,9 +25,11 @@ class UserController extends Controller
         
     }
 
-    public function packages(){
+    public function packages($coach_id, $type){
 
-        $packages = Package::get();
+        $packages = Package::where('coach_id','=',$coach_id)
+        ->where('type','=',$type)
+        ->get();
 
         return $packages;
 
@@ -37,6 +40,22 @@ class UserController extends Controller
         $package = Package::find($package_id);
 
         return $package;
+
+    }
+
+    public function getCoaches(){
+
+        $coaches = Coach::get();
+
+        return $coaches;
+
+    }
+
+    public function getCoach( $coach_id ){
+
+        $coach = Coach::find($coach_id);
+
+        return $coach;
 
     }
 
@@ -73,11 +92,41 @@ class UserController extends Controller
 
     }
 
-    public function memberBookings(){
+    public function memberBookings($member_id){
+
+        $bookings = Booking::leftJoin('coaches','coaches.id','=','bookings.coach_id')
+        ->leftJoin('packages','packages.id','=','bookings.package_id')
+        ->where('bookings.user_id','=',$member_id)
+        ->select('bookings.start_time','coaches.name as coach','packages.name as package','packages.price','packages.type')
+        ->get();
+
+        return $bookings;
 
     }
 
-    public function createBooking(){
+    public function createBooking( Request $request ){
+
+        $booking = new Booking;
+        $booking->user_id = 1;
+        $booking->start_time = $request->date;
+        $booking->package_id = $request->package_id;
+        $booking->coach_id = $request->coach_id;
+        $booking->status = 1;
+        
+
+        try {
+            $saved = $booking->save();
+            return 1; 
+        } catch (\Exception $e) {
+          
+            return 0;
+        }
+
+        if($saved){
+            return true;
+        }else{
+            return false;
+        };
         
     }
 
