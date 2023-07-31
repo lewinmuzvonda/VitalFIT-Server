@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime("start_time");
             $table->integer("package");
             $table->string("coach");
+            $table->string("notes")->nullable();
             $table->integer("status");
             $table->timestamps();
         });

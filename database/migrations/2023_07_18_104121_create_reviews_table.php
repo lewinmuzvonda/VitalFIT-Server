@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id");
+            $table->integer("coach_id");
             $table->string("review");
             $table->integer("star");
             $table->integer("status");

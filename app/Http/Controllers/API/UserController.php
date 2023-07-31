@@ -92,12 +92,25 @@ class UserController extends Controller
 
     }
 
+    public function getBooking( $booking_id, $member_id = 1 ){
+
+        $booking = Booking::leftJoin('coaches','coaches.id','=','bookings.coach_id')
+        ->leftJoin('packages','packages.id','=','bookings.package_id')
+        ->where('bookings.user_id','=',$member_id)
+        ->select('bookings.id','bookings.start_time','coaches.name as coach','coaches.image as coach_image','packages.name as package','packages.price','packages.type')
+        ->where('bookings.id','=',$booking_id)
+        ->first();
+
+        return $booking;
+
+    }
+
     public function memberBookings($member_id){
 
         $bookings = Booking::leftJoin('coaches','coaches.id','=','bookings.coach_id')
         ->leftJoin('packages','packages.id','=','bookings.package_id')
         ->where('bookings.user_id','=',$member_id)
-        ->select('bookings.start_time','coaches.name as coach','packages.name as package','packages.price','packages.type')
+        ->select('bookings.id','bookings.start_time','coaches.name as coach','packages.name as package','packages.price','packages.type')
         ->get();
 
         return $bookings;
@@ -111,6 +124,7 @@ class UserController extends Controller
         $booking->start_time = $request->date;
         $booking->package_id = $request->package_id;
         $booking->coach_id = $request->coach_id;
+        // $booking->notes = $request->notes;
         $booking->status = 1;
         
 
@@ -183,5 +197,13 @@ class UserController extends Controller
 
     public function deleteCourseReview(){
         
+    }
+
+    public function getCoachReviews( $coach_id ){
+
+        $coachReviews = Review::where('coach_id','=',$coach_id)->get();
+
+        return $coachReviews;
+
     }
 }
