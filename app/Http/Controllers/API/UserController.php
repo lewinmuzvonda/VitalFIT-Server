@@ -39,7 +39,7 @@ class UserController extends Controller
             'title' => "VitalFIT",
             'active' => true,
             'amount' => 100,
-            'return_url' => "https://vitalfit.lewindev.com/api/pay/success/".$transaction->id,
+            'return_url' => "https://vitalfit.lewindev.com/api/mamopay/success/".$transaction->id,
             'amount_currency' => "AED",
         );
 
