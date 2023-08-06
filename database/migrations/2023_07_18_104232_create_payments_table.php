@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("type");
             $table->double("amount");
-            table->double("transaction_id");
+            $table->integer("transaction_id");
             $table->string("status");
             $table->timestamps();
         });

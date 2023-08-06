@@ -47,4 +47,4 @@ Route::post('/course-review/delete/{review_id}', [UserController::class,'deleteC
 Route::get('/coach-reviews/{coach_id}', [UserController::class,'getCoachReviews']);
 
 Route::get('/pay/{user_id}/{amount}', [UserController::class,'mamoPay']);
-Route::get('/pay/{transaction_id}/success', [UserController::class,'mamoSuccess']);
+Route::get('/pay/success/{transaction_id}', [UserController::class,'mamoSuccess']);
