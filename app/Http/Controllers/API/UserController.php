@@ -25,13 +25,21 @@ class UserController extends Controller
 
     public function mamoPay( $user_id = 1, $amount ){
 
+        $transaction = new Transaction;
+        $transaction->user_id  = $user_id;
+        // $transaction->payment_url  = $response->payment_url;
+        // $transaction->payment_url_id  = $response->id;
+        $transaction->amount  = $amount;
+        $transaction->status  = "processing";
+        $transaction->save();
+
         $mamoCurl = curl_init();
 
         $postRequest = array(
             'title' => "VitalFIT",
             'active' => true,
             'amount' => 100,
-            'return_url' => "http://localhost:8000/api/pay/success",
+            'return_url' => "https://vitalfit.lewindev.com/api/pay/".$transaction->id."/success",
             'amount_currency' => "AED",
         );
 
@@ -54,13 +62,11 @@ class UserController extends Controller
         $response = curl_exec($mamoCurl);
         $response = json_decode($response);
 
-        $transaction = new Transaction;
-        $transaction->user_id  = $user_id;
-        $transaction->payment_url  = $response->payment_url;
-        $transaction->payment_url_id  = $response->id;
-        $transaction->amount  = $amount;
-        $transaction->status  = "processing";
-        $transaction->save();
+        Transaction::where('id', $transaction->id)->update([
+            'payment_url' => $response->payment_url,
+            'payment_url_id' => $response->id,
+        ]);
+
 
         if( isset($transaction->id) ){
             return array(
@@ -76,6 +82,28 @@ class UserController extends Controller
         }
 
         
+
+    }
+
+    public function mamoSuccess( $transaction_id ){
+
+        $transaction = Transaction::where("id","=",$transaction_id)->first();
+
+        Transaction::where('id', $transaction_id)->update([
+            'status' => "success",
+        ]);
+
+        $payment = new Payment;
+        $payment->type = "Booking";
+        $payment->amount = $transaction->amount;
+        $payment->transaction_id = $transaction_id;
+        $payment->status = "success";
+
+        return array(
+            "status" => "success",
+            "payment_id" => $payment->id,
+            "transaction_id" => $transaction->id,
+        );
 
     }
 

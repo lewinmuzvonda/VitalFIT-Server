@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id")->nullable();
-            $table->string("payment_url");
-            $table->string("payment_url_id");
+            $table->string("payment_url")->nullable();
+            $table->string("payment_url_id")->nullable();
             $table->double("amount");
             $table->string("status");
             $table->timestamps();
