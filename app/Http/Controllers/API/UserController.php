@@ -38,7 +38,7 @@ class UserController extends Controller
         $postRequest = array(
             'title' => "VitalFIT",
             'active' => true,
-            'amount' => 100,
+            'amount' => $amount,
             'return_url' => "https://vitalfit.lewindev.com/api/mamopay/success/".$transaction->id,
             'amount_currency' => "AED",
         );
@@ -98,6 +98,7 @@ class UserController extends Controller
         $payment->amount = $transaction->amount;
         $payment->transaction_id = $transaction_id;
         $payment->status = "success";
+        $payment->save();
 
         return array(
             "status" => "success",
