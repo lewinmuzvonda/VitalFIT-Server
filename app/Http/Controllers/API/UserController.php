@@ -201,6 +201,7 @@ class UserController extends Controller
         ->leftJoin('packages','packages.id','=','bookings.package_id')
         ->where('bookings.user_id','=',$member_id)
         ->select('bookings.id','bookings.start_time','coaches.name as coach','packages.name as package','packages.price','packages.type')
+        ->latest()
         ->get();
 
         return $bookings;
