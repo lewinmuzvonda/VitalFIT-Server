@@ -12,11 +12,73 @@ use App\Models\Booking;
 use App\Models\Member;
 use App\Models\MemeberRecord;
 use App\Models\Review;
+use App\Models\Transaction;
 use App\Models\Payment;
 use App\Models\Coach;
+use GuzzleHttp;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    public function mamoPay( $user_id = 1, $amount ){
+
+        $mamoCurl = curl_init();
+
+        $postRequest = array(
+            'title' => "VitalFIT",
+            'active' => true,
+            'amount' => 100,
+            'return_url' => "http://localhost:8000/api/pay/success",
+            'amount_currency' => "AED",
+        );
+
+        curl_setopt_array($mamoCurl, array(
+            CURLOPT_URL => 'https://sandbox.business.mamopay.com/manage_api/v1/links',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 100,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>json_encode($postRequest),
+            CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer sk-02e5e4ae-802c-480c-b8aa-85158be4d697',
+            'Content-Type: application/json'
+            ),
+        ));
+        
+        $response = curl_exec($mamoCurl);
+        $response = json_decode($response);
+
+        $transaction = new Transaction;
+        $transaction->user_id  = $user_id;
+        $transaction->payment_url  = $response->payment_url;
+        $transaction->payment_url_id  = $response->id;
+        $transaction->amount  = $amount;
+        $transaction->status  = "processing";
+        $transaction->save();
+
+        if( isset($transaction->id) ){
+            return array(
+                'transaction_id' => $transaction->id,
+                'payment_url' => $response->payment_url,
+                'payment_url_id' => $response->id,
+                'status' => "processing",
+            );
+        }else{
+            return array(
+                'status' => "failed",
+            );
+        }
+
+        
+
+    }
+
     public function startCourse(){
         
     }
@@ -206,4 +268,6 @@ class UserController extends Controller
         return $coachReviews;
 
     }
+
+    
 }

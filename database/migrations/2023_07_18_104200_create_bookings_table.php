@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer("user_id");
             $table->dateTime("start_time");
-            $table->integer("package");
-            $table->string("coach");
+            $table->integer("package_id");
+            $table->string("coach_id");
             $table->string("notes")->nullable();
             $table->integer("status");
             $table->timestamps();
