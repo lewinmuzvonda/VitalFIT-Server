@@ -67,7 +67,6 @@ class UserController extends Controller
             'payment_url_id' => $response->id,
         ]);
 
-
         if( isset($transaction->id) ){
             return array(
                 'transaction_id' => $transaction->id,
@@ -80,9 +79,6 @@ class UserController extends Controller
                 'status' => "failed",
             );
         }
-
-        
-
     }
 
     public function mamoSuccess( $transaction_id ){
@@ -177,7 +173,7 @@ class UserController extends Controller
     public function getCourseItem( $item_id ){
 
         $course_item = CourseItem::where('id','=',$item_id)
-        ->get();
+        ->first();
 
         return $course_item;
 
