@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->integer("course_id");
             $table->string("title");
+            $table->string("type");
             $table->string("description");
-            $table->string("image");
+            $table->string("image")->nullable();
             $table->string("image2")->nullable();
+            $table->string("video_url")->nullable();
             $table->integer("status")->nullable();
             $table->timestamps();
         });
