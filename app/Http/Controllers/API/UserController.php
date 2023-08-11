@@ -15,6 +15,7 @@ use App\Models\Review;
 use App\Models\Transaction;
 use App\Models\Payment;
 use App\Models\Coach;
+use App\Models\MemberCourse;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -23,6 +24,53 @@ use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
+
+    public function registerCourse( $course_id, $user_id, $payment_id ){
+
+        $userCourse = new MemberCourse;
+        $userCourse->user_id = $user_id;
+        $userCourse->course_id = $course_id;
+        $userCourse->status = "registered";
+
+        $checkPayment = curl_init();
+    
+        curl_setopt_array($checkPayment, array(
+            CURLOPT_URL => 'https://sandbox.business.mamopay.com/manage_api/v1/links/'.$payment_id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+            ),
+            ));
+
+        $response = curl_exec($checkPayment);
+        $response = json_decode($response);
+
+        curl_close($checkPayment);
+        
+        if($response->charges[0]->status == "captured"){
+            if($userCourse->save()){
+
+                return array(
+                    "status" => "success",
+                );
+    
+            
+        }
+
+       }
+
+        return array(
+            "status" => "failed",
+        );
+
+
+    }
 
     public function mamoPay( $user_id = 1, $amount ){
 
@@ -147,11 +195,29 @@ class UserController extends Controller
 
     }
 
-    public function courses(){
+    public function courses($user_id){
 
-        $courses = Course::get();
+        // $courses = Course::get();
 
-        return $courses;
+        $coursesNotTaken = Course::leftJoin('member_courses', function($join) use ($user_id) {
+            $join->on('courses.id', '=', 'member_courses.course_id')
+                 ->where('member_courses.user_id', '=', $user_id);
+        })
+        ->whereNull('member_courses.course_id')
+        ->select('courses.*')
+        ->get();
+
+        return $coursesNotTaken;
+
+    }
+
+    public function userCourses($user_id){
+
+        $userCourses = Course::leftJoin('member_courses','courses.id','=','member_courses.course_id')
+        ->where('member_courses.user_id','=',$user_id)
+        ->get();
+
+        return $userCourses;
 
     }
 

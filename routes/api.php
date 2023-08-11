@@ -31,10 +31,12 @@ Route::post('/booking/create', [UserController::class,'createBooking']);
 Route::post('/booking/update', [UserController::class,'editBooking']);
 Route::get('/booking/{booking_id}', [UserController::class,'getBooking']);
 
-Route::get('/courses', [UserController::class,'courses']);
+Route::get('/courses/{user_id}', [UserController::class,'courses']);
+Route::get('/user-courses/{user_id}', [UserController::class,'userCourses']);
 Route::get('/course/{course_id}', [UserController::class,'getCourse']);
 Route::get('/course-items/{course_id}', [UserController::class,'courseItems']);
 Route::get('/course-item/{item_id}', [UserController::class,'getCourseItem']);
+Route::get('/register-course/{course_id}/{user_id}/{payment_id}', [UserController::class,'registerCourse']);
 
 Route::get('/member-records/{user_id}', [UserController::class,'getMemberRecords']);
 Route::get('/member-record/{record_id}', [UserController::class,'getMemberRecord']);
