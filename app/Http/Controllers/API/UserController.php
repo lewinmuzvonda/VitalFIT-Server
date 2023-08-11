@@ -19,6 +19,7 @@ use GuzzleHttp;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
