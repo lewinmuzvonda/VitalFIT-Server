@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\MemberRecord;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +32,12 @@ class AuthController extends Controller
 
         if ($user) {
 
+            $record = MemberRecord::create([
+                'user_id' => $user->id,
+                'weight' => $request->weight,
+                'height' => $request->height,
+            ]);
+
             return array(
                 'status' => 'success',
                 'message' => 'User created succesfully!',
@@ -53,6 +60,7 @@ class AuthController extends Controller
             $accessToken = $request->user()->createToken('authToken')->plainTextToken;
 
             $userData = User::find($user->id);
+            $latestRecord = MemberRecord::latest('created_at')->first();
 
             return array(
                 'status' => "success",
@@ -63,6 +71,8 @@ class AuthController extends Controller
                 'gender' => $userData->gender,
                 'dob' => $userData->dob,
                 'phone_number' => $userData->phone_number,
+                'weight' => $latestRecord->weight,
+                'height' => $latestRecord->height,
             );
         }
 
