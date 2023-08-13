@@ -10,7 +10,7 @@ use App\Models\CourseItem;
 use App\Models\CourseProgress;
 use App\Models\Booking;
 use App\Models\Member;
-use App\Models\MemeberRecord;
+use App\Models\MemberRecord;
 use App\Models\Review;
 use App\Models\Transaction;
 use App\Models\Payment;
@@ -310,6 +310,14 @@ class UserController extends Controller
         
     }
 
+    public function getLatestMemberRecord( $user_id ){
+
+        $latestRecord = MemberRecord::where('user_id','=',$user_id)->latest('created_at')->first();
+
+        return $latestRecord;
+        
+    }
+
     public function getMemberRecords( $user_id ){
 
         $records = MemberRecord::where('user_id','=',$user_id)->get();
@@ -318,7 +326,23 @@ class UserController extends Controller
         
     }
 
-    public function addMemberRecord(){
+    public function addMemberRecord( Request $request ){
+
+        $record = new MemberRecord;
+        $record->user_id = 1;
+        $record->weight = $request->weight;
+        $record->height = $request->height;
+
+        try {
+            $saved = $record->save();
+            return array(
+                "status" => "success",
+            ); 
+        } catch (\Exception $e) {
+            return array(
+                "status" => "failed",
+            );
+        }
         
     }
 

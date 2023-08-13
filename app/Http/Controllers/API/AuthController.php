@@ -60,7 +60,7 @@ class AuthController extends Controller
             $accessToken = $request->user()->createToken('authToken')->plainTextToken;
 
             $userData = User::find($user->id);
-            $latestRecord = MemberRecord::latest('created_at')->first();
+            $latestRecord = MemberRecord::where('user_id','=',$user->id)->latest('created_at')->first();
 
             return array(
                 'status' => "success",

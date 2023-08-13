@@ -40,6 +40,7 @@ Route::get('/register-course/{course_id}/{user_id}/{payment_id}', [UserControlle
 
 Route::get('/member-records/{user_id}', [UserController::class,'getMemberRecords']);
 Route::get('/member-record/{record_id}', [UserController::class,'getMemberRecord']);
+Route::get('/latest-record/{user_id}', [UserController::class,'getLatestMemberRecord']);
 Route::post('/member-record/add', [UserController::class,'addMemberRecord']);
 Route::post('/member-record/update/{record_id}', [UserController::class,'updateMemberRecord']);
 Route::post('/member-record/delete/{record_id}', [UserController::class,'deleteMemberRecord']);
