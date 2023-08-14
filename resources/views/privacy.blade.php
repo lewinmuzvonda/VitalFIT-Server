@@ -1,62 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VitalFIT Privacy Policy</title>
-</head>
-<body>
-    <h1>VitalFIT Privacy Policy</h1>
+<x-guest-layout>
+    <div class="pt-4 bg-gray-100">
+        <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
+          
 
-    <p>Last Updated: [Date]</p>
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
+                <html>
 
-    <p>Welcome to VitalFIT! This Privacy Policy outlines how we collect, use, disclose, and safeguard your personal information. By accessing or using VitalFIT, you agree to the practices described in this Privacy Policy.</p>
+    <body>
+        <p>
+            <b>At VitalFIT, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and protect the information you provide when using our VitalFIT mobile application ("the App").</b>
 
-    <h2>Information We Collect</h2>
-    <p>VitalFIT may collect various types of information to provide and improve our services:</p>
-    <ul>
-        <li>Personal Information: We may collect your name, email address, age, gender, and other relevant information you provide when registering or using our app.</li>
-        <li>Health and Fitness Data: You can choose to provide health-related data, such as weight, height, workout routines, and dietary preferences, to personalize your experience.</li>
-        <li>Usage Information: We collect data on how you interact with the app, including your activity, device information, and browsing history.</li>
-    </ul>
+            <ul>
+                <li>
+                    <h2>Information We Collect:</h2>
+                       <p>
+                        We may collect the following types of information when you use the App:
+                        Personal Information: When you register or use certain features of the App, we may collect personal information such as your name, email address, and contact details.
+                        Usage Information: We may collect information about how you interact with the App, including the features you use, the duration of your sessions, and your preferences.
+                        Device Information: We may collect information about your device, such as its unique identifier, operating system, and mobile network information.
+                        How We Use Your Information:
+                        We may use the information we collect for the following purposes:
+                        To provide and improve the App's functionality and user experience.
+                        To personalize your experience and provide tailored content and recommendations.
+                        To communicate with you regarding updates, promotions, and important notices.
+                        To analyze usage patterns and trends to enhance our services.
+                        To protect the security and integrity of the App and our users.
+                        Information Sharing and Disclosure:
+                        We may share your information in the following circumstances:
+                        With service providers and business partners who assist us in operating the App and providing our services.
+                        With your consent or at your direction, such as when you choose to share content through social media platforms.
+                        In response to a legal request, such as a court order or government inquiry, or as otherwise required by law.
+                        In connection with a merger, acquisition, or sale of all or a portion of our assets, where your information may be transferred as part of the transaction.
+                        Data Security:
+                        We take appropriate technical and organizational measures to protect your information from unauthorized access, disclosure, alteration, or destruction. However, please note that no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+                       </p>
+                </li>
+                <li>
+                    <h2>Children's Privacy:</h2>
+            The App is not intended for use by individuals under the age of 13. We do not knowingly collect personal information from children. If we become aware that we have inadvertently collected personal information from a child, we will take steps to delete such information as soon as possible.
 
-    <h2>How We Use Your Information</h2>
-    <p>We use your information for various purposes, including:</p>
-    <ul>
-        <li>Providing and improving our services</li>
-        <li>Personalizing your experience</li>
-        <li>Communicating with you</li>
-        <li>Analyzing and enhancing our app's performance</li>
-        <li>Complying with legal obligations</li>
-    </ul>
+            <li>
+                <h2>Updates to this Privacy Policy:</h2>
+                <p>We may update this Privacy Policy from time to time. The revised policy will be effective upon posting on this page. We encourage you to review the Privacy Policy periodically for any changes.</p>
 
-    <h2>Information Sharing and Disclosure</h2>
-    <p>We may share your information with:</p>
-    <ul>
-        <li>Service providers assisting with app operations</li>
-        <li>Third-party analytics and advertising partners</li>
-        <li>Legal authorities in response to legal requests</li>
-    </ul>
+            <li>
+                <h2>Contact Us:</h2>
+                <p>If you have any questions, concerns, or requests regarding this Privacy Policy or the App's privacy practices, please contact us at vitalityfitness80@gmail.com</p>
 
-    <h2>Your Choices</h2>
-    <p>You can:</p>
-    <ul>
-        <li>Access, update, or delete your personal information</li>
-        <li>Opt-out of certain data collection and sharing</li>
-    </ul>
-
-    <h2>Security</h2>
-    <p>We implement reasonable security measures to protect your information, but no method of transmission is entirely secure.</p>
-
-    <h2>Children's Privacy</h2>
-    <p>VitalFIT is not intended for children under the age of 13. We do not knowingly collect or store personal information from children.</p>
-
-    <h2>Changes to this Privacy Policy</h2>
-    <p>We may update this Privacy Policy periodically. The date at the top will indicate the latest revision.</p>
-
-    <h2>Contact Us</h2>
-    <p>If you have any questions or concerns about this Privacy Policy, please contact us at [email address].</p>
-
-    <p>This Privacy Policy is effective as of [Date].</p>
-</body>
-</html>
+                <p>By using the VitalFIT App, you signify your consent to the collection, use, and disclosure of your information as described in this Privacy Policy.</p>
+    </p>
+            </div>
+        </div>
+    </div>
+</x-guest-layout>
