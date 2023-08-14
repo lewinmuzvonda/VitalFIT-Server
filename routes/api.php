@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/packages/{coach_id}/{type}', [UserController::class,'packages']);
 Route::get('/coach/{coach_id}', [UserController::class,'getCoach']);
 Route::get('/coaches', [UserController::class,'getCoaches']);
+Route::get('/user/delete/{user_id}', [UserController::class,'deleteUser']);
 
 Route::get('/bookings/{user_id}', [UserController::class,'memberBookings']);
 Route::post('/booking/create', [UserController::class,'createBooking']);

@@ -72,7 +72,7 @@ class UserController extends Controller
 
     }
 
-    public function mamoPay( $user_id = 1, $amount ){
+    public function mamoPay( $user_id , $amount ){
 
         $transaction = new Transaction;
         $transaction->user_id  = $user_id;
@@ -274,11 +274,11 @@ class UserController extends Controller
     public function createBooking( Request $request ){
 
         $booking = new Booking;
-        $booking->user_id = 1;
+        $booking->user_id = $request->user_id;
         $booking->start_time = $request->date;
         $booking->package_id = $request->package_id;
         $booking->coach_id = $request->coach_id;
-        // $booking->notes = $request->notes;
+        $booking->notes = $request->notes;
         $booking->status = 1;
         
 
@@ -329,7 +329,7 @@ class UserController extends Controller
     public function addMemberRecord( Request $request ){
 
         $record = new MemberRecord;
-        $record->user_id = 1;
+        $record->user_id = $request->user_id;
         $record->weight = $request->weight;
         $record->height = $request->height;
 
