@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookings', [MainController::class, 'bookings'])->name('bookings');
     Route::get('/manage-booking/{booking_id}', [MainController::class, 'manageBooking'])->name('booking');
     Route::get('/offers', [MainController::class, 'offers'])->name('offers');
+    Route::get('/manage-offer/{offer_id}', [MainController::class, 'manageOffer'])->name('offer');
+    Route::get('/partners', [MainController::class, 'partners'])->name('partners');
+    Route::get('/manage-partner/{partner_id}', [MainController::class, 'managePartner'])->name('partner');
 });
 
 require __DIR__.'/auth.php';

@@ -32,6 +32,9 @@ Route::post('/booking/create', [UserController::class,'createBooking']);
 Route::post('/booking/update', [UserController::class,'editBooking']);
 Route::get('/booking/{booking_id}', [UserController::class,'getBooking']);
 
+Route::get('/offers', [UserController::class, 'offers'])->name('offersAPI');
+Route::get('/partners', [UserController::class, 'partners'])->name('partnersAPI');
+
 Route::get('/courses/{user_id}', [UserController::class,'courses']);
 Route::get('/user-courses/{user_id}', [UserController::class,'userCourses']);
 Route::get('/course/{course_id}', [UserController::class,'getCourse']);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Package;
+use App\Models\Offer;
+use App\Models\Partner;
 use App\Models\Course;
 use App\Models\CourseItem;
 use App\Models\CourseProgress;
@@ -178,6 +180,23 @@ class UserController extends Controller
         return $package;
 
     }
+
+    public function offers(){
+
+        $offers = Offer::get();
+
+        return $offers;
+
+    }
+
+    public function partners(){
+
+        $partners = Partner::get();
+
+        return $partners;
+
+    }
+
 
     public function getCoaches(){
 

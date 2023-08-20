@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Offer;
+use App\Models\Partner;
 
 class MainController extends Controller
 {
@@ -109,6 +111,22 @@ class MainController extends Controller
         return view('coach/booking',[
             'booking' => $booking,
         ]);
+
+    }
+
+    public function offers(){
+
+    }
+
+    public function partners(){
+
+    }
+
+    public function manageOffer($offer_id){
+
+    }
+
+    public function managePartner($partner_id){
 
     }
 
