@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Booking;
 
 class MainController extends Controller
 {
@@ -83,6 +84,31 @@ class MainController extends Controller
     }
 
     public function bookings(){
+
+        $bookings = Booking::leftJoin('users','users.id','=','bookings.user_id')
+        ->leftJoin('packages','packages.id','=','bookings.package_id')
+        ->leftJoin('coaches','coaches.id','=','bookings.coach_id')
+        ->select('bookings.id','bookings.start_time','bookings.notes','bookings.status','coaches.name as coach','coaches.bio as coach_bio','packages.name as package','packages.price','packages.type','users.name as client')
+        ->get();
+
+        return view('coach/bookings',[
+            'bookings' => $bookings,
+        ]);
+
+    }
+
+    public function manageBooking($booking_id){
+
+        $booking = Booking::leftJoin('users','users.id','=','bookings.user_id')
+        ->leftJoin('packages','packages.id','=','bookings.package_id')
+        ->leftJoin('coaches','coaches.id','=','bookings.coach_id')
+        ->select('bookings.id','bookings.start_time','bookings.notes','bookings.status','coaches.name as coach','coaches.bio as coach_bio','packages.name as package','packages.price','packages.type','users.name as client')
+        ->where('bookings.id','=',$booking_id)
+        ->first();
+
+        return view('coach/booking',[
+            'booking' => $booking,
+        ]);
 
     }
 
