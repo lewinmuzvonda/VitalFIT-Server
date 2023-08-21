@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Offer;
 use App\Models\Partner;
+use App\Models\User;
+use App\Models\Coach;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\MemberRecord;
 
 class MainController extends Controller
 {
@@ -116,17 +121,164 @@ class MainController extends Controller
 
     public function offers(){
 
+        $offers = Offer::get();
+
+        return view('admin/offer/list',[
+            'offers' => $offers,
+        ]);
+
     }
 
     public function partners(){
+
+        $partners = Partner::get();
+
+        return view('admin/partner/list',[
+            'partners' => $partners,
+        ]);
+
+    }
+
+    public function createOffer(){
+
+        return view('admin/offer/create');
+
+    }
+
+    public function saveOffer(Request $request){
+
+        $offer = new Offer;
+        $offer->title = $request->offer;
+        $offer->status = 1;
+        $offer->save();
+
+        return redirect()->to('/offers');
 
     }
 
     public function manageOffer($offer_id){
 
+        $offer = Offer::where('id','=',$offer_id)->first();
+
+        return view('admin/offer/edit',[
+            'offer' => $offer
+        ]);
+
+    }
+
+    public function updateOffer(Request $request){
+
+        Offer::where('id', $request->id)->update([
+            'title' => $request->offer,
+        ]);
+
+        return redirect()->to('/offers');
+
+    }
+
+    public function deleteOffer($offer_id){
+
+        Offer::where('id', $offer_id)->delete();
+
+        
+
+        return redirect()->to('/offers');
+
+    }
+
+    public function users(){
+
+        $users = User::get();
+
+        return view('admin/user/list',[
+            'users' => $users,
+        ]);
+
+    }
+
+    public function createUser(){
+
+        return view('admin/user/create');
+
+    }
+
+    public function saveUser(Request $request){
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->name;
+        $user->phone_number = $request->phone;
+        $user->gender = $request->gender;
+        $user->user_type = $request->user_type;
+        $user->dob = $request->dob;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        if ($request->user_type == "member") {
+
+            $record = MemberRecord::create([
+                'user_id' => $user->id,
+                'weight' => $request->weight,
+                'height' => $request->height,
+            ]);
+
+            return redirect()->to('/users');
+
+        }else if ($request->user_type == "coach") {
+
+            $record = Coach::create([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'bio' => $request->bio,
+                'image' => $request->image_data,
+            ]);
+
+            return redirect()->to('/users');
+        }
+
+        return redirect()->to('/users');
+
+    }
+
+    public function manageUser($user_id){
+
+        $user = User::where('id','=',$user_id)->first();
+
+        return view('admin/user/edit',[
+            'user' => $user
+        ]);
+
+    }
+
+    public function updateUser(Request $request){
+
+        User::where('id', $request->id)->update([
+            'title' => $request->offer,
+        ]);
+
+        return redirect()->to('/offers');
+
+    }
+
+    public function deleteUser($user_id){
+
+        User::where('id', $user_id)->delete();
+
+        
+
+        return redirect()->to('/users');
+
+    }
+
+    public function createPartner(){
+
+        return view('admin/partners/create');
+
     }
 
     public function managePartner($partner_id){
+
+        $partner = Partner::where('id','=',$partner_id)->first();
 
     }
 

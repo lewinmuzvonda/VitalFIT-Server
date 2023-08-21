@@ -31,10 +31,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/bookings', [MainController::class, 'bookings'])->name('bookings');
     Route::get('/manage-booking/{booking_id}', [MainController::class, 'manageBooking'])->name('booking');
+    
     Route::get('/offers', [MainController::class, 'offers'])->name('offers');
-    Route::get('/manage-offer/{offer_id}', [MainController::class, 'manageOffer'])->name('offer');
+    Route::get('/create-offer', [MainController::class, 'createOffer'])->name('offers.create');
+    Route::post('/create-offer', [MainController::class, 'saveOffer'])->name('offers.save');
+    Route::get('/manage-offer/{offer_id}', [MainController::class, 'manageOffer'])->name('offers.manage');
+    Route::post('/manage-offer', [MainController::class, 'updateOffer'])->name('offers.update');
+    Route::get('/delete-offer/{offer_id}', [MainController::class, 'deleteOffer'])->name('offers.delete');
+
     Route::get('/partners', [MainController::class, 'partners'])->name('partners');
-    Route::get('/manage-partner/{partner_id}', [MainController::class, 'managePartner'])->name('partner');
+    Route::get('/manage-partner/{partner_id}', [MainController::class, 'managePartner'])->name('partners.manage');
+
+    Route::get('/users', [MainController::class, 'users'])->name('users');
+    Route::get('/create-user', [MainController::class, 'createUser'])->name('users.create');
+    Route::post('/create-user', [MainController::class, 'saveUser'])->name('users.save');
+    Route::get('/manage-user/{user_id}', [MainController::class, 'manageUser'])->name('users.manage');
+    Route::post('/manage-user', [MainController::class, 'updateUser'])->name('users.update');
+    Route::get('/delete-user/{user_id}', [MainController::class, 'deleteUser'])->name('users.delete');
+    
 });
 
 require __DIR__.'/auth.php';
