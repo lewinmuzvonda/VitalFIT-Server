@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('/login');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->to('/bookings');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
