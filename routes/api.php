@@ -32,6 +32,8 @@ Route::post('/booking/create', [UserController::class,'createBooking']);
 Route::post('/booking/update', [UserController::class,'editBooking']);
 Route::get('/booking/{booking_id}', [UserController::class,'getBooking']);
 
+Route::get('/testimonials', [UserController::class,'testimonials']);
+
 Route::get('/offers', [UserController::class, 'offers'])->name('offersAPI');
 Route::get('/partners', [UserController::class, 'partners'])->name('partnersAPI');
 

@@ -15,6 +15,7 @@ use App\Models\Member;
 use App\Models\MemberRecord;
 use App\Models\Review;
 use App\Models\Transaction;
+use App\Models\Testimonial;
 use App\Models\Payment;
 use App\Models\Coach;
 use App\Models\MemberCourse;
@@ -130,6 +131,14 @@ class UserController extends Controller
                 'status' => "failed",
             );
         }
+    }
+
+    public function testimonials(){
+
+        $testimonials = Testimonial::where('status','=',1)
+        ->get();
+
+        return $testimonials;
     }
 
     public function mamoSuccess( $transaction_id ){
