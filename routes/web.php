@@ -36,6 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/testimonials', [MainController::class, 'testimonials'])->name('testimonials');
+    Route::get('/create-testimonial', [MainController::class, 'createTestimonial'])->name('testimonials.create');
+    Route::post('/create-testimonial', [MainController::class, 'saveTestimonial'])->name('testimonials.save');
+    Route::get('/delete-testimonial/{testimonial_id}', [MainController::class, 'deleteTestimonial'])->name('testimonials.delete');
+
     Route::get('/bookings', [MainController::class, 'bookings'])->name('bookings');
     Route::get('/manage-booking/{booking_id}', [MainController::class, 'manageBooking'])->name('booking');
     

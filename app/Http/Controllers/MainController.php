@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Offer;
+use App\Models\Testimonial;
 use App\Models\Partner;
 use App\Models\User;
 use App\Models\Coach;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MemberRecord;
+use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
@@ -119,6 +121,54 @@ class MainController extends Controller
 
     }
 
+    public function testimonials(){
+
+        $testimonials = Testimonial::orderBy('created_at', 'desc')
+        ->get();
+
+        return view('admin/testimonial/list',[
+            'testimonials' => $testimonials,
+        ]);
+
+    }
+
+    public function createTestimonial(){
+
+        return view('admin/testimonial/create');
+
+    }
+
+    public function saveTestimonial(Request $request){
+
+        // dd($_FILES['video']);
+
+        $request->validate([
+            'video' => 'required|mimes:mp4', // Adjust max file size as needed
+        ]);
+    
+        $file = $request->file('video');
+        Log::debug('Uploaded File:', [$file]);
+
+        $videoPath = $request->file('video')->store('videos', 'public');
+        // dd($videoPath);
+        $testimonial = new Testimonial;
+        $testimonial->title = $request->title;
+        $testimonial->video_url = asset('storage/' . $videoPath);
+        $testimonial->status = 1;
+        $testimonial->save();
+
+        return redirect()->to('/testimonials');
+
+    }
+
+    public function deleteTestimonial($testimonial_id){
+
+        Testimonial::where('id', $testimonial_id)->delete();
+
+        return redirect()->to('/testimonials');
+
+    }
+
     public function offers(){
 
         $offers = Offer::get();
@@ -179,8 +229,6 @@ class MainController extends Controller
     public function deleteOffer($offer_id){
 
         Offer::where('id', $offer_id)->delete();
-
-        
 
         return redirect()->to('/offers');
 
