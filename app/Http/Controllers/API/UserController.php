@@ -135,7 +135,8 @@ class UserController extends Controller
 
     public function testimonials(){
 
-        $testimonials = Testimonial::where('status','=',1)
+        $testimonials = Testimonial::orderBy('created_at', 'desc')
+        ->where('status','=',1)
         ->get();
 
         return $testimonials;
