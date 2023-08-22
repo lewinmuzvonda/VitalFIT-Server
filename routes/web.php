@@ -19,6 +19,13 @@ Route::get('/', function () {
     return redirect()->to('/login');
 });
 
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
 Route::get('/dashboard', function () {
     return redirect()->to('/bookings');
 })->middleware(['auth', 'verified'])->name('dashboard');
