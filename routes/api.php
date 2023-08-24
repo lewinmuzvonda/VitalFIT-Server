@@ -45,6 +45,7 @@ Route::get('/course-item/{item_id}', [UserController::class,'getCourseItem']);
 Route::get('/register-course/{course_id}/{user_id}/{payment_id}', [UserController::class,'registerCourse']);
 
 Route::post('/review/add', [UserController::class,'addCoachReview']);
+Route::get('/coach-reviews/{coach_id}', [UserController::class,'getCoachReviews']);
 
 Route::get('/member-records/{user_id}', [UserController::class,'getMemberRecords']);
 Route::get('/member-record/{record_id}', [UserController::class,'getMemberRecord']);
@@ -58,8 +59,6 @@ Route::get('/course-reviews/{course_id}/{user_id}', [UserController::class,'memb
 Route::post('/course-review/add', [UserController::class,'addCourseReview']);
 Route::post('/course-review/update/{review_id}', [UserController::class,'updateCourseReview']);
 Route::post('/course-review/delete/{review_id}', [UserController::class,'deleteCourseReview']);
-
-Route::get('/coach-reviews/{coach_id}', [UserController::class,'getCoachReviews']);
 
 Route::get('/pay/{user_id}/{amount}', [UserController::class,'mamoPay']);
 Route::get('/mamopay/success/{transaction_id}', [UserController::class,'mamoSuccess']);
