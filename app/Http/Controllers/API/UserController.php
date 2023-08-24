@@ -428,7 +428,10 @@ class UserController extends Controller
 
     public function getCoachReviews( $coach_id ){
 
-        $coachReviews = Review::where('coach_id','=',$coach_id)->get();
+        $coachReviews = Review::leftJoin('users','users.id','=','reviews.user_id')
+        ->where('reviews.coach_id','=',$coach_id)
+        ->select('reviews.review','users.name')
+        ->get();
 
         return $coachReviews;
 
