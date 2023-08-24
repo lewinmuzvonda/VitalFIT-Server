@@ -375,6 +375,26 @@ class UserController extends Controller
         
     }
 
+    public function addCoachReview( Request $request ){
+
+        $review = new Review;
+        $review->user_id = $request->user_id;
+        $review->review = $request->review;
+        $review->coach_id = $request->coach;
+
+        try {
+            $saved = $review->save();
+            return array(
+                "status" => "success",
+            ); 
+        } catch (\Exception $e) {
+            return array(
+                "status" => "failed",
+            );
+        }
+        
+    }
+
     public function updateMemberRecord(){
         
     }

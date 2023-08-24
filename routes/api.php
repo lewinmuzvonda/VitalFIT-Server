@@ -44,6 +44,8 @@ Route::get('/course-items/{course_id}', [UserController::class,'courseItems']);
 Route::get('/course-item/{item_id}', [UserController::class,'getCourseItem']);
 Route::get('/register-course/{course_id}/{user_id}/{payment_id}', [UserController::class,'registerCourse']);
 
+Route::post('/review/add', [UserController::class,'addCoachReview']);
+
 Route::get('/member-records/{user_id}', [UserController::class,'getMemberRecords']);
 Route::get('/member-record/{record_id}', [UserController::class,'getMemberRecord']);
 Route::get('/latest-record/{user_id}', [UserController::class,'getLatestMemberRecord']);

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer("user_id");
             $table->integer("coach_id");
             $table->string("review");
-            $table->integer("star");
-            $table->integer("status");
+            // $table->integer("star");
+            // $table->integer("status");
             $table->timestamps();
         });
     }
