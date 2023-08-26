@@ -9,6 +9,7 @@ use App\Models\Offer;
 use App\Models\Partner;
 use App\Models\Course;
 use App\Models\CourseItem;
+use App\Models\BookingSlot;
 use App\Models\CourseProgress;
 use App\Models\Booking;
 use App\Models\Member;
@@ -280,7 +281,7 @@ class UserController extends Controller
         $booking = Booking::leftJoin('coaches','coaches.id','=','bookings.coach_id')
         ->leftJoin('packages','packages.id','=','bookings.package_id')
         ->where('bookings.user_id','=',$member_id)
-        ->select('bookings.id','bookings.start_time','coaches.name as coach','coaches.image as coach_image','packages.name as package','packages.price','packages.type')
+        ->select('bookings.id','bookings.start_time','coaches.name as coach','coaches.image as coach_image','packages.name as package','packages.price','packages.type','bookings.status')
         ->where('bookings.id','=',$booking_id)
         ->first();
 
@@ -293,11 +294,17 @@ class UserController extends Controller
         $bookings = Booking::leftJoin('coaches','coaches.id','=','bookings.coach_id')
         ->leftJoin('packages','packages.id','=','bookings.package_id')
         ->where('bookings.user_id','=',$member_id)
-        ->select('bookings.id','bookings.start_time','coaches.name as coach','packages.name as package','packages.price','packages.type')
+        ->select('bookings.id','bookings.start_time','coaches.name as coach','packages.name as package','packages.price','packages.type','bookings.status')
         ->get();
 
         return $bookings;
+    }
 
+    public function memberBookingSlots($booking_id){
+
+        $slots = BookingSlot::where('booking_slots.booking_id','=',$booking_id)->get();
+
+        return $slots;
     }
 
     public function createBooking( Request $request ){

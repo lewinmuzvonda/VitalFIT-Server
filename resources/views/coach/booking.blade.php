@@ -47,14 +47,22 @@
                                                 <option value="1" selected>(Current) Confirmed</option>
                                                 <option value="2">Cancelled</option>
                                                 <option value="0">Pending</option>
+                                                <option value="3">Completed</option>
                                             @elseif($booking->status == 0)
                                                 <option value="1">Confirmed</option>
                                                 <option value="2">Cancelled</option>
                                                 <option value="0" selected>(Current) Pending</option>
+                                                <option value="3">Completed</option>
                                             @elseif($booking->status == 2)
                                                 <option value="1">Confirmed</option>
                                                 <option value="2" selected>(Current) Cancelled</option>
                                                 <option value="0">Pending</option>
+                                                <option value="3">Completed</option>
+                                            @elseif($booking->status == 3)
+                                                <option value="1">Confirmed</option>
+                                                <option value="2">Cancelled</option>
+                                                <option value="0">Pending</option>
+                                                <option value="3" selected>(Current) Completed</option>
                                             @endif
                                         </select>
                                     </div>

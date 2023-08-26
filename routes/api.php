@@ -31,6 +31,7 @@ Route::get('/bookings/{user_id}', [UserController::class,'memberBookings']);
 Route::post('/booking/create', [UserController::class,'createBooking']);
 Route::post('/booking/update', [UserController::class,'editBooking']);
 Route::get('/booking/{booking_id}', [UserController::class,'getBooking']);
+Route::get('/slots/{booking_id}', [UserController::class,'memberBookingSlots']);
 
 Route::get('/testimonials', [UserController::class,'testimonials']);
 
