@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Coach;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\BookingSlot;
 use App\Models\MemberRecord;
 use Illuminate\Support\Facades\Log;
 
@@ -111,13 +112,78 @@ class MainController extends Controller
         $booking = Booking::leftJoin('users','users.id','=','bookings.user_id')
         ->leftJoin('packages','packages.id','=','bookings.package_id')
         ->leftJoin('coaches','coaches.id','=','bookings.coach_id')
+        ->select('bookings.id','bookings.start_time','bookings.notes','bookings.status','coaches.name as coach','coaches.bio as coach_bio','packages.name as package','packages.price','packages.type','users.name as client','packages.slots')
+        ->where('bookings.id','=',$booking_id)
+        ->first();
+
+        $bookingSlots = BookingSlot::where('booking_id','=',$booking_id)->get();
+
+        $slotsCount = $bookingSlots->count();
+
+        return view('coach/booking',[
+            'booking' => $booking,
+            'slots' => $bookingSlots,
+            'slotsCount' => $slotsCount,
+        ]);
+
+    }
+
+    public function manageBookingStatus(Request $request){
+
+        Booking::where('id', $request->booking_id)->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->to('/manage-booking'.'/'.$request->booking_id);
+
+    }
+
+    public function createSlot($booking_id){
+
+        $booking = Booking::leftJoin('users','users.id','=','bookings.user_id')
+        ->leftJoin('packages','packages.id','=','bookings.package_id')
+        ->leftJoin('coaches','coaches.id','=','bookings.coach_id')
         ->select('bookings.id','bookings.start_time','bookings.notes','bookings.status','coaches.name as coach','coaches.bio as coach_bio','packages.name as package','packages.price','packages.type','users.name as client')
         ->where('bookings.id','=',$booking_id)
         ->first();
 
-        return view('coach/booking',[
+        return view('coach/slot/create',[
             'booking' => $booking,
         ]);
+
+    }
+
+    public function updateSlot($slot_id){
+
+        $slot = BookingSlot::where('booking_slots.id','=',$slot_id)
+        ->first();
+
+        return view('coach/slot/edit',[
+            'slot' => $slot,
+        ]);
+
+    }
+
+    public function changeSlot(Request $request){
+
+        BookingSlot::where('id', $request->slot_id)->update([
+            'slot_time' => $request->time,
+        ]);
+
+        return redirect()->to('/manage-booking'.'/'.$request->booking_id);
+
+    }
+
+    public function saveSlot(Request $request){
+
+        $booking_id = $request->booking_id;;
+        $slot = new BookingSlot;
+        $slot->slot_time = $request->time;
+        $slot->booking_id = $booking_id;
+        $slot->status = "confirmed";
+        $slot->save();
+
+        return redirect()->to('/manage-booking'.'/'.$booking_id);
 
     }
 

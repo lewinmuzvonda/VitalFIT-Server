@@ -44,7 +44,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/bookings', [MainController::class, 'bookings'])->name('bookings');
     Route::get('/manage-booking/{booking_id}', [MainController::class, 'manageBooking'])->name('booking');
-    
+    Route::post('/manage-booking', [MainController::class, 'manageBookingStatus'])->name('booking.status');
+    Route::get('/create-slot/{booking_id}', [MainController::class, 'createSlot'])->name('slots.create');
+    Route::post('/create-slot', [MainController::class, 'saveSlot'])->name('slots.save');
+    Route::get('/update-slot/{slot_id}', [MainController::class, 'updateSlot'])->name('slots.update');
+    Route::post('/update-slot', [MainController::class, 'changeSlot'])->name('slots.change');
+
     Route::get('/offers', [MainController::class, 'offers'])->name('offers');
     Route::get('/create-offer', [MainController::class, 'createOffer'])->name('offers.create');
     Route::post('/create-offer', [MainController::class, 'saveOffer'])->name('offers.save');
