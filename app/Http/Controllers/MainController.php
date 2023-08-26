@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Offer;
+use App\Models\Package;
 use App\Models\Testimonial;
 use App\Models\Partner;
 use App\Models\User;
@@ -17,29 +18,6 @@ use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
-    public function packages(){
-
-    }
-
-    public function addPackage(){
-        
-    }
-
-    public function savePackage(){
-        
-    }
-
-    public function editPackage(){
-        
-    }
-
-    public function updatePackage(){
-        
-    }
-
-    public function deletePackage(){
-        
-    }
 
     public function courses(){
 
@@ -297,6 +275,66 @@ class MainController extends Controller
         Offer::where('id', $offer_id)->delete();
 
         return redirect()->to('/offers');
+
+    }
+
+    public function packages(){
+
+        $packages = Package::get();
+
+        return view('admin/package/list',[
+            'packages' => $packages,
+        ]);
+
+    }
+
+    public function createPackage(){
+
+        return view('admin/package/create');
+
+    }
+
+    public function savePackage(Request $request){
+
+        $package = new Package;
+        $package->name = $request->name;
+        $package->type = $request->type;
+        $package->price = $request->price;
+        $package->slots = $request->slots;;
+        $package->save();
+
+        return redirect()->to('/packages');
+
+    }
+
+    public function managePackage($package_id){
+
+        $package = Package::where('id','=',$package_id)->first();
+
+        return view('admin/package/edit',[
+            'package' => $package
+        ]);
+
+    }
+
+    public function updatePackage(Request $request){
+
+        Package::where('id', $request->id)->update([
+            'name' => $request->name,
+            'type' => $request->type,
+            'price' => $request->price,
+            'slots' => $request->slots,
+        ]);
+
+        return redirect()->to('/packages');
+
+    }
+
+    public function deletePackage($package_id){
+
+        Package::where('id', $package_id)->delete();
+
+        return redirect()->to('/packages');
 
     }
 

@@ -57,6 +57,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/manage-offer', [MainController::class, 'updateOffer'])->name('offers.update');
     Route::get('/delete-offer/{offer_id}', [MainController::class, 'deleteOffer'])->name('offers.delete');
 
+    Route::get('/packages', [MainController::class, 'packages'])->name('packages');
+    Route::get('/create-package', [MainController::class, 'createPackage'])->name('packages.create');
+    Route::post('/create-package', [MainController::class, 'savePackage'])->name('packages.save');
+    Route::get('/manage-package/{package_id}', [MainController::class, 'managePackage'])->name('packages.manage');
+    Route::post('/manage-package', [MainController::class, 'updatePackage'])->name('packages.update');
+    Route::get('/delete-package/{package_id}', [MainController::class, 'deletePackage'])->name('packages.delete');
+
     Route::get('/partners', [MainController::class, 'partners'])->name('partners');
     Route::get('/manage-partner/{partner_id}', [MainController::class, 'managePartner'])->name('partners.manage');
 
