@@ -23,9 +23,9 @@
                         <x-nav-link :href="route('packages')" :active="request()->routeIs('packages')">
                             {{ __('Packages') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('offers')" :active="request()->routeIs('offers')">
+                        {{-- <x-nav-link :href="route('offers')" :active="request()->routeIs('offers')">
                             {{ __('Offers') }}
-                        </x-nav-link>
+                        </x-nav-link> --}}
                         <x-nav-link :href="route('testimonials')" :active="request()->routeIs('testimonials')">
                             {{ __('Testimonials') }}
                         </x-nav-link>
@@ -96,13 +96,13 @@
             <x-responsive-nav-link :href="route('packages')" :active="request()->routeIs('packages')">
                 {{ __('Packages') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('offers')" :active="request()->routeIs('offers')">
+            {{-- <x-responsive-nav-link :href="route('offers')" :active="request()->routeIs('offers')">
                 {{ __('Offers') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> --}}
             <x-responsive-nav-link :href="route('testimonials')" :active="request()->routeIs('testimonials')">
                 {{ __('Testimonials') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('offers')" :active="request()->routeIs('offers')">
+            <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')">
                 {{ __('Users') }}
             </x-responsive-nav-link>
             @endif
