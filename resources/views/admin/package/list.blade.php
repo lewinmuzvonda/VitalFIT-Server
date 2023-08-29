@@ -17,6 +17,7 @@
                             </tr>
 
                             <tr>
+                                <th>Coach</th>
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Price</th>
@@ -28,6 +29,7 @@
                         <tbody>
                             @foreach($packages as $package)
                             <tr>
+                                <td>{{$package->coach}}</td>
                                 <td>{{$package->name}}</td>
                                 <td>
                                     @if($package->type == 1)

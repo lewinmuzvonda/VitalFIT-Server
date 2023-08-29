@@ -11,6 +11,15 @@
             <div class="row">
                 <form class="p-5" action="{{ route('packages.save') }}" method="POST" enctype='multipart/form-data'>
                     {{ csrf_field() }}
+
+                    <div class="form-group pb-4">
+                        <label for="type" class="pb-2">Coach<span style="color:red">*</span></label>
+                        <select class="form-control" id="coach_id" name="coach_id" required>
+                                @foreach($coaches as $coach)
+                                    <option value="{{$coach->id}}">{{$coach->name}}</option>
+                                @endforeach
+                        </select>
+                    </div>
                     
                     <div class="form-group pb-4">
                       <label for="name" class="pb-2">Package Name (e.g 2 Sessions)<span style="color:red">*</span></label>

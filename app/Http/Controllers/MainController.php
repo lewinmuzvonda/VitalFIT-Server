@@ -280,7 +280,9 @@ class MainController extends Controller
 
     public function packages(){
 
-        $packages = Package::get();
+        $packages = Package::leftJoin('coaches','coaches.id','=','packages.coach_id')
+        ->select('packages.id','packages.name','packages.price','packages.type','packages.slots','coaches.name as coach')
+        ->get();
 
         return view('admin/package/list',[
             'packages' => $packages,
@@ -290,13 +292,18 @@ class MainController extends Controller
 
     public function createPackage(){
 
-        return view('admin/package/create');
+        $coaches = Coach::get();
+
+        return view('admin/package/create',[
+            'coaches' => $coaches,
+        ]);
 
     }
 
     public function savePackage(Request $request){
 
         $package = new Package;
+        $package->coach_id = $request->coach_id;
         $package->name = $request->name;
         $package->type = $request->type;
         $package->price = $request->price;
