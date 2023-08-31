@@ -79,6 +79,7 @@ class UserController extends Controller
     public function mamoPay( $user_id , $amount ){
 
         $transaction = new Transaction;
+        // $transaction->booking_id  = $booking_id;
         $transaction->user_id  = $user_id;
         // $transaction->payment_url  = $response->payment_url;
         // $transaction->payment_url_id  = $response->id;
@@ -152,6 +153,7 @@ class UserController extends Controller
         ]);
 
         $payment = new Payment;
+        // $payment->booking_id = $transaction->booking_id;
         $payment->type = "Booking";
         $payment->amount = $transaction->amount;
         $payment->transaction_id = $transaction_id;
@@ -320,7 +322,8 @@ class UserController extends Controller
 
         try {
             $saved = $booking->save();
-            return 1; 
+            // return $booking->id; 
+            return 1;
         } catch (\Exception $e) {
           
             return 0;
