@@ -39,7 +39,7 @@ class UserController extends Controller
         $checkPayment = curl_init();
     
         curl_setopt_array($checkPayment, array(
-            CURLOPT_URL => 'https://sandbox.business.mamopay.com/manage_api/v1/links/'.$payment_id,
+            CURLOPT_URL => 'https://business.mamopay.com/manage_api/v1/links/'.$payment_id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -97,7 +97,7 @@ class UserController extends Controller
         );
 
         curl_setopt_array($mamoCurl, array(
-            CURLOPT_URL => 'https://sandbox.business.mamopay.com/manage_api/v1/links',
+            CURLOPT_URL => 'https://business.mamopay.com/manage_api/v1/links',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 100,
