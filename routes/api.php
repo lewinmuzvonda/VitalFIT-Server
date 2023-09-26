@@ -61,6 +61,6 @@ Route::post('/course-review/add', [UserController::class,'addCourseReview']);
 Route::post('/course-review/update/{review_id}', [UserController::class,'updateCourseReview']);
 Route::post('/course-review/delete/{review_id}', [UserController::class,'deleteCourseReview']);
 
-Route::get('/pay/{user_id}/{amount}', [UserController::class,'mamoPay']); //old for courses
+Route::get('/pay/{user_id}/{package_id}', [UserController::class,'mamoPay']); //old for courses
 // Route::get('/pay/{user_id}/{booking_id}/{amount}', [UserController::class,'mamoPay']);
 Route::get('/mamopay/success/{transaction_id}', [UserController::class,'mamoSuccess']);

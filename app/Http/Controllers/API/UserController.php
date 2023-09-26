@@ -76,7 +76,10 @@ class UserController extends Controller
 
     }
 
-    public function mamoPay( $user_id , $amount ){
+    public function mamoPay( $user_id , $package_id ){
+
+        $package = Package::where('id','=',$package_id)->first();
+        $amount = ($package->price) * ($package->slots);
 
         $transaction = new Transaction;
         // $transaction->booking_id  = $booking_id;
@@ -127,6 +130,7 @@ class UserController extends Controller
                 'payment_url' => $response->payment_url,
                 'payment_url_id' => $response->id,
                 'status' => "processing",
+                'amount' => $amount,
             );
         }else{
             return array(
