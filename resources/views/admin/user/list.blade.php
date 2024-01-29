@@ -19,6 +19,7 @@
                                 <th>Email</th>
                                 <th>D.O.B</th>
                                 <th>Gender</th>
+                                <th>Created At</th>
                                 {{-- <th></th> --}}
                             </tr>
                         </thead>
@@ -31,6 +32,7 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->dob}}</td>
                                 <td>{{ucfirst(trans($user->gender))}}</td>
+                                <td>{{$user->created_at}}</td>
                                 {{-- <td>
                                     <a href="/manage-user/{{$user->id}}"><button class="btn btn-primary">UPDATE USER</button></a>
                                 </td> --}}
